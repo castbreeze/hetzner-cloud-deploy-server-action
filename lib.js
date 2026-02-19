@@ -17,8 +17,8 @@ const options = {
     public_net: {
       enable_ipv4: core.getInput("enable-ipv4") === "true",
       enable_ipv6: core.getInput("enable-ipv6") === "true",
-      ipv4: core.getInput("ipv4"),
-      ipv6: core.getInput("ipv6")
+      ipv4: +core.getInput("ipv4"),
+      ipv6: +core.getInput("ipv6")
     }
   },
   sshKeyName: core.getInput("ssh-key-name"),
