@@ -58,6 +58,18 @@ const options = {
 async function deploy() {
   let res;
   try {
+    console.log("Sending request to Hetzner Cloud API to deploy a new server with the following options:");
+    console.log(options);
+    const body = {
+      name: options.server.name,
+      image: options.server.image,
+      server_type: options.server.type,
+      location: options.server.location,
+      public_net: options.server.public_net,
+      ssh_keys: [options.sshKeyName]
+    }
+    console.log("Request body:");
+    console.log(body);
     res = await fetch(`${config.API}/servers`, {
       method: "POST",
       headers: {
@@ -65,14 +77,7 @@ async function deploy() {
         Authorization: `Bearer ${options.hcloudToken}`,
         "User-Agent": config.USER_AGENT
       },
-      body: JSON.stringify({
-        name: options.server.name,
-        image: options.server.image,
-        server_type: options.server.type,
-        location: options.server.location,
-        public_net: options.server.public_net,
-        ssh_keys: [options.sshKeyName]
-      })
+      body: JSON.stringify(body)
     });
   } catch (err) {
     core.setFailed(err.message);
