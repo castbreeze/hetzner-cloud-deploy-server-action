@@ -16,6 +16,20 @@ inputs:
       description: "The location your server should be initiated in."
       required: false
       default: 1
+  ipv4:
+    description: "The IPv4 address you want to assign to your server. Only works if enable-ipv4 is set to true."
+    required: false
+  ipv6:
+    description: "The IPv6 address you want to assign to your server. Only works if enable-ipv6 is set to true."
+    required: false
+  enable-ipv4:
+    description: "Regulates whether an IPv4 address should be assigned to the server."
+    required: false
+    default: true
+  enable-ipv6:
+    description: "Regulates whether an IPv6 address should be assigned to the server."
+    required: false
+    default: true
   ssh-key-name:
     description: "The ssh key, you want your server to be provisioned with."
     required: true

@@ -47,7 +47,13 @@ const options = {
     name: core.getInput("server-name"),
     image: core.getInput("server-image"),
     type: core.getInput("server-type"),
-    location: core.getInput("server-location")
+    location: core.getInput("server-location"),
+    public_net: {
+      enable_ipv4: core.getInput("enable-ipv4") === "true",
+      enable_ipv6: core.getInput("enable-ipv6") === "true",
+      ipv4: core.getInput("ipv4"),
+      ipv6: core.getInput("ipv6")
+    }
   },
   sshKeyName: core.getInput("ssh-key-name"),
   hcloudToken: core.getInput("hcloud-token"),
@@ -65,7 +71,11 @@ async function deploy() {
         "User-Agent": config.USER_AGENT
       },
       body: JSON.stringify({
-        ...options.server,
+        name: options.server.name,
+        image: options.server.image,
+        server_type: options.server.type,
+        location: options.server.location,
+        public_net: options.server.public_net,
         ssh_keys: [options.sshKeyName]
       })
     });
