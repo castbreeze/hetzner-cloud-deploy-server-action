@@ -31,10 +31,7 @@ async function deploy() {
         "User-Agent": config.USER_AGENT
       },
       body: JSON.stringify({
-        name: options.server.name,
-        image: options.server.image,
-        server_type: options.server.type,
-        location: options.server.location,
+        ...options.server,
         ssh_keys: [options.sshKeyName]
       })
     });
